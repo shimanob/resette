@@ -1,0 +1,47 @@
+<section class="section" style="margin-bottom: 66px">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @users.each do |recipe| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="flame image is-4by5">
+                <%= link_to recipe_path(recipe) do %>
+                  <%= attachment_image_tag recipe, :image %>
+                <% end %>
+              </figure>
+            </div>
+
+          <div class="column">
+            <table class="table is-fullwidth">
+              <tr class="flame item">
+                <td class="image is-64x64 style="border: none;">
+                  <%= attachment_image_tag recipe.user, :profile_image, fallback: "no-image.png", class: "profile_image" %>
+                </td>
+              <td style="border: none;">
+                  <%=link_to recipe.user.username, user_path(recipe.user) %>
+                </td>
+              <td style="margin-left: auto; margin-right: auto; border: none;">
+                  <% if current_user.already_liked?(recipe) %>
+                    <%= link_to recipe_likes_path(recipe), method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to recipe_likes_path(recipe), method: :post do %>
+                      <i class="far fa-heart"></i>
+                    <% end %>
+                  <% end %>
+                  <%= recipe.likes.count %>
+              </td>
+            </table>
+
+            <div class="content">
+              <time><%= recipe.updated_at.strftime("%Y-%m-%d ") %></time>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>

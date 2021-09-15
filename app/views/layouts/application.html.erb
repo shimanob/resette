@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recette</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="margin-bottom: 66px">
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+
+    <nav style="border-bottom: groove">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-4 " style="font-family: cursive; color: #F4A460;">recette</h1>
+
+        <% end %>
+        
+      <% if user_signed_in? %>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-item">
+            <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "レシピ投稿", new_recipe_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "タイムライン", followings_recipe_path(:id), class: "navbar-item button is-warning is-light" %>
+          </div>
+
+
+
+
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <%= link_to "ユーザー一覧", users_path, class: " button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-item">
+            <%= link_to "ホーム", root_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "ユーザー一覧", users_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+          <%= link_to "タイムライン", followings_recipe_path(:id), class: "navbar-item button is-warning is-light" %>
+        </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </nav>
+
+  <aside >
+    <nav class="navbar has-background-grey is-fixed-bottom navbar-brand columns is-mobile" role="navigation">
+      <% if user_signed_in? %>
+        <%= link_to recipes_path, class: "navbar-item column has-text-centered has-text-white" do %>
+          <i class="fa fa-home"></i>
+          <p class="is-size-7 has-text-centered">HOME</p>
+        <% end %>
+        <%= link_to  users_path, class: "navbar-item column has-text-centered has-text-white" do %>
+          <i class="fa fa-search"></i>
+          <p class="is-size-7 has-text-centered">Search</p>
+        <% end %>
+        <%= link_to new_recipe_path, class: "navbar-item column has-text-centered has-text-white" do %>
+          <i class="far fa-plus-square"></i>
+          <p class="is-size-7 has-text-centered">NEW</p>
+        <% end %>
+        <%= link_to  user_path(current_user), class: "navbar-item column has-text-centered has-text-white" do %>
+          <i class="fa fa-user"></i>
+          <p class="is-size-7 has-text-centered">Account</p>
+        <% end %>
+        <%= link_to  destroy_user_session_path, method: :delete, class: "navbar-item column has-text-centered has-text-white" do %>
+          <i class="fas fa-sign-out-alt"></i>
+          <p class="is-size-7 has-text-centered has-text-white">Logout</p>
+        <% end %>
+
+      <% else %>
+      <nav class="navbar has-background-grey is-fixed-bottom navbar-brand columns is-mobile" role="navigation">
+      <%= link_to root_path, class: "navbar-item column has-text-centered has-text-white" do %>
+              <i class="fa fa-home"></i>
+              <p class="is-size-7 has-text-centered has-text-white">HOME</p>
+            <% end %>
+            <%= link_to users_path, class: "navbar-item column has-text-centered has-text-white" do %>
+              <i class="fa fa-user"></i>
+              <p class="is-size-7 has-text-centered has-text-white">Account</p>
+            <% end %>
+            <%= link_to new_user_session_path, class: "navbar-item column has-text-centered has-text-white" do %>
+              <i class="fas fa-sign-in-alt"></i>
+              <p class="is-size-7 has-text-centered has-text-white">LOGIN</p>
+            <% end %>
+            <%= link_to new_user_registration_path, class: "navbar-item column has-text-centered has-text-white" do %>
+              <i class="fa fa-user"></i>
+              <p class="is-size-7 has-text-centered has-text-white">NEW</p>
+            <% end %>
+      <% end %>
+    </nav>
+  </aside>
+    <%= yield %>
+  </body>
+
+</html>

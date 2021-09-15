@@ -1,0 +1,46 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="columns is-centered">
+
+         <div class="column is-8">
+           <div>
+           </div>
+
+            <div>
+              <table class="table is-fullwidth">
+                <% @users.each do |user| %>
+                  <tr class="flame item">
+                  <td class="image is-128x128"  style="border: none;">
+                  <%= attachment_image_tag user, :profile_image, fallback: "no-image.png", class: "profile_image is-rounded" %>
+                 </td>
+     
+                     <td class="title is-size-6" style="margin-right: auto; margin-bottom: 0 ; border: none;"><%=link_to user.username, user_path(user) %>
+                     </td>
+                    <td style="margin-left: auto; margin-right: auto; border: none;">
+                        <% if user != current_user %>
+                            <% if user.is_followed_by?(current_user) %>
+                                <%=link_to user_relationships_path(user), method: :delete do %>
+                                    <button type="button" class="btn btn btn-danger">フォロー解除</button>
+                                <% end %>
+                                <% else %>
+                                <%=link_to user_relationships_path(user), method: :post do %>
+                                    <button type="button" class="btn btn btn-primary">フォロー</button>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </td>
+                    </tr>
+
+                <% end %>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+        
+        
+        

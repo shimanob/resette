@@ -1,0 +1,84 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bulma";
+
+.notification:not(:last-child) {
+  margin-bottom: 0;
+}
+
+.profile_image {
+  border-radius: 50%;
+}
+
+.main-image {
+  height: 940px;
+  background-image: url(meal.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+div {
+  flex: 1;
+}
+
+aside {
+  display: none;
+}
+
+.input {
+  height: 3rem;
+}
+
+.flame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 1023px) {
+  aside {
+    display: block;
+    text-align: center;
+  }
+  .navbar-brand .navbar-item,
+  .navbar-tabs .navbar-item {
+    display: block;
+  }
+  .columns {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+  }
+  .columns:last-child {
+    margin-bottom: 0;
+  }
+  .section {
+    padding: 0;
+  }
+  .column {
+    padding: 0;
+  }
+  .image.is-128x128 {
+    height: 64px;
+    width: 64px;
+  }
+}

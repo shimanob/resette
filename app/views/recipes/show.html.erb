@@ -1,0 +1,89 @@
+<section class="section" style="margin-bottom: 66px">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-7">
+        <div class="card">
+          <div class="card-image">
+            <figure class="flame image is-4by5">
+              <%= attachment_image_tag @recipe, :image %>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4 has-text-centered"><%= @recipe.title %></p>
+              </div>
+            </div>
+            <div class="content">
+              <table class="table is-narrow">
+                <tr>
+                  <th>レシピ</th>
+                </tr>
+                <tr>
+                  <td><%= simple_format @recipe.body %></td>
+                </tr>
+              </table>
+              <% if @recipe.user.id == current_user.id %>
+                <%= link_to "編集画面へ", edit_recipe_path(@recipe), class: "button is-success" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+
+      <div class="column is-4">
+        <article class="panel is-link">
+          <p class="panel-heading">
+            By <%= @recipe.user.username %>
+          </p>
+          <div class="panel-block">
+            <p class="control">
+              <%= @recipe.user.profile %>
+            </p>
+          </div>
+          <%= link_to user_path(@recipe.user), class: "panel-block" do %>
+            <span class="panel-icon">
+              <i class="fas fa-user" aria-hidden="true"></i>
+            </span>
+            <%= @recipe.user.username %> さんのページへ
+          <% end %>
+           <% @recipe.comments.each do |comment| %>
+        <div>
+          <%= link_to comment.user.username, [comment.user] %>
+        </div>
+        <div>
+          <%= comment.body %>
+        </div>
+        <% if comment.user == current_user %>
+        <div>
+          <%= link_to 'delete', [@recipe, comment], method: :delete %>
+        </div>
+        <% end %>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <%= form_with model: [@recipe, @comment], local: true do |f| %>
+          <div>
+            <%= f.text_field :body %>
+          </div>
+          <%= f.submit '投稿する'%>
+        <% end %>
+      <% end %>
+
+      <% if current_user.already_liked?(@recipe) %>
+        <%= link_to recipe_likes_path(@recipe), method: :delete do %>
+          <i class="fas fa-heart"></i>
+        <% end %>
+        <% else %>
+        <%= link_to recipe_likes_path(@recipe), method: :create do %>
+          <i class="far fa-heart"></i>
+        <% end %>
+      <% end %>
+    <%= @recipe.likes.count %>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
