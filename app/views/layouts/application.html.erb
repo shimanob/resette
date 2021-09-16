@@ -66,7 +66,7 @@
       <% else %>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
           <div class="navbar-item">
-            <%= link_to "ホーム", root_path, class: "navbar-item button is-warning is-light" %>
+            <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
           </div>
           <div class="navbar-item">
             <%= link_to "ユーザー一覧", users_path, class: "navbar-item button is-warning is-light" %>
@@ -117,7 +117,7 @@
 
       <% else %>
       <nav class="navbar has-background-grey is-fixed-bottom navbar-brand columns is-mobile" role="navigation">
-      <%= link_to root_path, class: "navbar-item column has-text-centered has-text-white" do %>
+      <%= link_to recipes_path, class: "navbar-item column has-text-centered has-text-white" do %>
               <i class="fa fa-home"></i>
               <p class="is-size-7 has-text-centered has-text-white">HOME</p>
             <% end %>
