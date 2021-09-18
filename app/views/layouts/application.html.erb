@@ -94,11 +94,11 @@
   <aside >
     <nav class="navbar has-background-grey is-fixed-bottom navbar-brand columns is-mobile" role="navigation">
       <% if user_signed_in? %>
-        <%= link_to recipes_path, class: "navbar-item column has-text-centered has-text-white" do %>
+        <%= link_to followings_recipe_path(:id), class: "navbar-item column has-text-centered has-text-white" do %>
           <i class="fa fa-home"></i>
           <p class="is-size-7 has-text-centered">HOME</p>
         <% end %>
-        <%= link_to  users_path, class: "navbar-item column has-text-centered has-text-white" do %>
+        <%= link_to recipes_path, class: "navbar-item column has-text-centered has-text-white" do %>
           <i class="fa fa-search"></i>
           <p class="is-size-7 has-text-centered">Search</p>
         <% end %>
