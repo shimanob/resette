@@ -110,8 +110,8 @@
           <i class="fa fa-user"></i>
           <p class="is-size-7 has-text-centered">Account</p>
         <% end %>
-        <%= link_to  destroy_user_session_path, method: :delete, class: "navbar-item column has-text-centered has-text-white" do %>
-          <i class="fas fa-sign-out-alt"></i>
+        <%= link_to user_likes_path(current_user), class: "navbar-item column has-text-centered has-text-white" do %>
+          <i class="far fa-heart"></i>
           <p class="is-size-7 has-text-centered has-text-white">Logout</p>
         <% end %>
 
