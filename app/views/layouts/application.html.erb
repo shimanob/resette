@@ -57,7 +57,7 @@
                   <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
                 </p>
                 <p class="control">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
+                  <%= link_to "お気に入り一覧", user_likes_path(current_user), class: "button is-warning is-light" %>
                 </p>
               </div>
             </div>
@@ -112,7 +112,7 @@
         <% end %>
         <%= link_to user_likes_path(current_user), class: "navbar-item column has-text-centered has-text-white" do %>
           <i class="far fa-heart"></i>
-          <p class="is-size-7 has-text-centered has-text-white">Logout</p>
+          <p class="is-size-7 has-text-centered has-text-white">Favorite</p>
         <% end %>
 
       <% else %>
