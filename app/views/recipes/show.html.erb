@@ -1,7 +1,7 @@
 <section class="section" style="margin-bottom: 66px">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-7">
+      <div class="column is-5">
         <div class="card">
           <div class="card-image">
             <figure class="flame image is-4by5">
@@ -49,39 +49,43 @@
             </span>
             <%= @recipe.user.username %> さんのページへ
           <% end %>
+
            <% @recipe.comments.each do |comment| %>
-        <div>
-          <%= link_to comment.user.username, [comment.user] %>
-        </div>
-        <div>
-          <%= comment.body %>
-        </div>
-        <% if comment.user == current_user %>
-        <div>
-          <%= link_to 'delete', [@recipe, comment], method: :delete %>
-        </div>
-        <% end %>
-      <% end %>
+            <div class="panel-block">
+              <%= link_to comment.user.username, [comment.user] %>
+            </div>
+            <div class="panel-block">
+              <%= comment.body %>
+            </div>
+            <% if comment.user == current_user %>
+            <div class="panel-block">
+              <%= link_to 'delete', [@recipe, comment], method: :delete %>
+            </div>
+            <% end %>
+          <% end %>
 
-      <% if user_signed_in? %>
-        <%= form_with model: [@recipe, @comment], local: true do |f| %>
-          <div>
-            <%= f.text_field :body %>
+          <% if user_signed_in? %>
+            <%= form_with model: [@recipe, @comment], local: true do |f| %>
+              <div class="panel-block">
+                <%= f.text_field :body %>
+              </div>
+              <div class="panel-block">
+                <%= f.submit '投稿する'%>
+              </div>
+            <% end %>
+          <% end %>
+          <div class="panel-block">
+            <% if current_user.already_liked?(@recipe) %>
+              <%= link_to recipe_likes_path(@recipe), method: :delete do %>
+                <i class="fas fa-heart"></i>
+              <% end %>
+              <% else %>
+              <%= link_to recipe_likes_path(@recipe), method: :create do %>
+                <i class="far fa-heart"></i>
+              <% end %>
+            <% end %>
+            <%= @recipe.likes.count %>
           </div>
-          <%= f.submit '投稿する'%>
-        <% end %>
-      <% end %>
-
-      <% if current_user.already_liked?(@recipe) %>
-        <%= link_to recipe_likes_path(@recipe), method: :delete do %>
-          <i class="fas fa-heart"></i>
-        <% end %>
-        <% else %>
-        <%= link_to recipe_likes_path(@recipe), method: :create do %>
-          <i class="far fa-heart"></i>
-        <% end %>
-      <% end %>
-    <%= @recipe.likes.count %>
         </article>
       </div>
     </div>
