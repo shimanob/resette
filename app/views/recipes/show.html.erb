@@ -49,31 +49,43 @@
             </span>
             <%= @recipe.user.username %> さんのページへ
           <% end %>
-
-           <% @recipe.comments.each do |comment| %>
-            <div class="panel-block">
-              <%= link_to comment.user.username, [comment.user] %>
-            </div>
-            <div class="panel-block">
-              <%= comment.body %>
-            </div>
-            <% if comment.user == current_user %>
-            <div class="panel-block">
-              <%= link_to 'delete', [@recipe, comment], method: :delete %>
-            </div>
+          
+          <div>
+          <table class="table is-fullwidth">
+            <% @recipe.comments.each do |comment| %>
+              <tr class="flame item">
+              <td class="title is-size-6" style="margin: 0; margin-right: auto;">
+                <%= link_to comment.user.username, [comment.user] %>
+              </td>
+              <td class="title is-size-6" style="margin: 0; margin-right: auto;">
+                <%= comment.body %>
+              </td>
+              <td class="title is-size-6">
+              <% if comment.user == current_user %>
+                <%= link_to '削除', [@recipe, comment], method: :delete, class:"button is-small is-primary"%>
+              <% end %>
+              </td>
+              </tr>
             <% end %>
-          <% end %>
+          </table>
+          </div>
 
+          <div>
+          <table class="table is-fullwidth">
+          <tr class="flame item">
           <% if user_signed_in? %>
             <%= form_with model: [@recipe, @comment], local: true do |f| %>
-              <div class="panel-block">
+              <td class="panel-block">
                 <%= f.text_field :body %>
-              </div>
-              <div class="panel-block">
+              </td>
+              <td class="panel-block">
                 <%= f.submit '投稿する'%>
-              </div>
+              </td>
             <% end %>
           <% end %>
+          </table>
+          </div>
+
           <div class="panel-block">
             <% if current_user.already_liked?(@recipe) %>
               <%= link_to recipe_likes_path(@recipe), method: :delete do %>
