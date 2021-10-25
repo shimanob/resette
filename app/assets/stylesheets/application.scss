@@ -24,6 +24,13 @@
   border-radius: 50%;
 }
 
+.main-image {
+  height: 100vh;
+  background-image: url(resette.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 div {
   flex: 1;
 }
