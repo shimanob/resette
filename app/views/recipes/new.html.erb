@@ -26,10 +26,12 @@
 
           <div class="field">
             <%= f.label :image, "写真", class: "label" %>
+            <div class="has-text-centered">
             <%= f.attachment_field :image, class: "input" %>
+            </div>
           </div>
 
-          <%= f.submit '投稿', class: "button is-success input" %>
+          <%= f.submit '投稿', class: "button is-success input mt-6" %>
         <% end %>
       </div>
     </div>
