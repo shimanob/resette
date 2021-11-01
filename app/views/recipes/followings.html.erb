@@ -1,4 +1,4 @@
-<section class="section" style="margin-bottom: 66px">
+<section class="section main-image" style="margin-bottom: 66px">
   <div class="container">
     <div class="columns is-multiline">
       <% @users.each do |recipe| %>
@@ -35,7 +35,7 @@
               </td>
             </table>
 
-            <div class="content">
+            <div class="content" >
               <time><%= recipe.updated_at.strftime("%Y-%m-%d ") %></time>
             </div>
           </div>

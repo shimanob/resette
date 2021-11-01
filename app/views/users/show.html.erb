@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section main-image">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -30,17 +30,19 @@
                 <td>
                     <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-primary" %>
                 </td>
-                <% else %>
-                  <% if @user.is_followed_by?(current_user) %>
-                    <%= link_to user_relationships_path(@user),  method: :delete do %>
-                      <button class="btn btn-primary">フォロー解除</button>
-                    <% end %>
+                <div>
                   <% else %>
-                    <%= link_to user_relationships_path(@user),  method: :post do %>
-                      <button class="btn btn-primary">フォロー</button>
+                    <% if @user.is_followed_by?(current_user) %>
+                      <%= link_to user_relationships_path(@user),  method: :delete do %>
+                        <button class="button is-primary">フォロー解除</button>
+                      <% end %>
+                    <% else %>
+                      <%= link_to user_relationships_path(@user),  method: :post do %>
+                        <button class="button is-primary">フォロー</button>
+                      <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </tr>
             <table class="table is-fullwidth">
               <tr>
